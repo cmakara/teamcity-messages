@@ -150,14 +150,17 @@ class TeamcityServiceMessages(object):
     def setParameter(self, name, value):
         self.message('setParameter', name=name, value=value)
 
+    def buildStatisticValue(self, key, value):
+        self.message('buildStatisticValue', key=key, value=str(value))
+
     def buildStatisticLinesCovered(self, linesCovered):
-        self.message('buildStatisticValue', key='CodeCoverageAbsLCovered', value=str(linesCovered))
+        self.buildStatisticValue('CodeCoverageAbsLCovered', linesCovered)
 
     def buildStatisticTotalLines(self, totalLines):
-        self.message('buildStatisticValue', key='CodeCoverageAbsLTotal', value=str(totalLines))
+        self.buildStatisticValue('CodeCoverageAbsLTotal', totalLines)
 
     def buildStatisticLinesUncovered(self, linesUncovered):
-        self.message('buildStatisticValue', key='CodeCoverageAbsLUncovered', value=str(linesUncovered))
+        self.buildStatisticValue('CodeCoverageAbsLUncovered', linesUncovered)
 
     def enableServiceMessages(self, flowId=None):
         self.message('enableServiceMessages', flowId=flowId)

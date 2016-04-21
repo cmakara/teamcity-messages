@@ -223,6 +223,15 @@ def test_set_parameter():
         """).strip().encode('utf-8')
 
 
+def test_build_statistic_value():
+    stream = StreamStub()
+    messages = TeamcityServiceMessages(output=stream, now=lambda: fixed_date)
+    messages.buildStatisticValue('CustomKey', '1234')
+    assert stream.observed_output.strip() == textwrap.dedent("""\
+            ##teamcity[buildStatisticValue timestamp='2000-11-02T10:23:01.556' key='CustomKey' value='1234']
+        """).strip().encode('utf-8')
+
+
 def test_build_statistic_lines_covered():
     stream = StreamStub()
     messages = TeamcityServiceMessages(output=stream, now=lambda: fixed_date)
